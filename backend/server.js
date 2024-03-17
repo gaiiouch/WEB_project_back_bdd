@@ -1,5 +1,3 @@
-// server.js
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -12,7 +10,7 @@ const router = express.Router();
 // set our port to either a predetermined port number if you have set it up, or 3001
 const API_PORT = process.env.API_PORT || 3001;
 
-mongoose.connect("mongodb://localhost:3010/art")
+mongoose.connect("mongodb://localhost:3010/art-guessr")
 var db = mongoose.connection;
 db.on('error',()=> console.error('Erreur de connexion'));
 
