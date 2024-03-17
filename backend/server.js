@@ -12,7 +12,7 @@ const router = express.Router();
 // set our port to either a predetermined port number if you have set it up, or 3001
 const API_PORT = process.env.API_PORT || 3001;
 
-mongoose.connect("mongodb://localhost:3010/art-guessr")
+mongoose.connect("mongodb://localhost:3010/art")
 var db = mongoose.connection;
 db.on('error',()=> console.error('Erreur de connexion'));
 
@@ -21,14 +21,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // now we can set the route path & initialize the API
-
-const newArt = new Art({
-  title: "Nouvelle œuvre",
-  artist: "Artiste inconnu",
-  date: "2024",
-  image: "url_de_l_image",
-  more_info: "Description de la nouvelle œuvre"
-});
 
 router.get('/art-guessr', (req, res) => {
   Art.find()
