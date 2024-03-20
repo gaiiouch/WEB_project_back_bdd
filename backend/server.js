@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const Art = require("./model/Art");
+const MongoClient = require('mongodb').MongoClient;
 
 // and create our instances
 const app = express();
@@ -10,7 +11,7 @@ const router = express.Router();
 // set our port to either a predetermined port number if you have set it up, or 3001
 const API_PORT = process.env.API_PORT || 3001;
 
-mongoose.connect("mongodb://localhost:3010/art-guessr")
+mongoose.connect("url a mettre")
 var db = mongoose.connection;
 db.on('error',()=> console.error('Erreur de connexion'));
 
@@ -20,7 +21,7 @@ app.use(bodyParser.json());
 
 // now we can set the route path & initialize the API
 
-router.get('/art-guessr', (req, res) => {
+router.get('/arts', (req, res) => {
   Art.find()
     .then(art => {
       res.json({ success: true, data: art });
