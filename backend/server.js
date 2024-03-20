@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const Art = require("./model/Art");
-const MongoClient = require('mongodb').MongoClient;
 
 // and create our instances
 const app = express();
