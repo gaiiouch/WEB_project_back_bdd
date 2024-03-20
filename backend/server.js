@@ -2,6 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const Art = require("./model/Art");
+require('dotenv').config();
+
 
 // and create our instances
 const app = express();
@@ -10,7 +12,7 @@ const router = express.Router();
 // set our port to either a predetermined port number if you have set it up, or 3001
 const API_PORT = process.env.API_PORT || 3001;
 
-mongoose.connect("url a mettre")
+mongoose.connect(process.env.DB_URL)
 var db = mongoose.connection;
 db.on('error',()=> console.error('Erreur de connexion'));
 
