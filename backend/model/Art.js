@@ -8,7 +8,8 @@ const ArtSchema = new Schema({
   artist: String,
   date: String,
   image: String,
-  more_info: String
+  more_info: String,
+  level: String
 });
 
 // export our module to use in server.js

@@ -25,8 +25,7 @@ app.use(bodyParser.json());
 router.get('/arts', (req, res) => {
   Art.find()
     .then(art => {
-      console.log(art);
-      res.status(200).json(art);
+      res.json(art);
     })
     .catch(err => {
       res.json({ success: false, data: { error: err } });
