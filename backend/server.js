@@ -25,12 +25,14 @@ app.use(bodyParser.json());
 router.get('/arts', (req, res) => {
   Art.find()
     .then(art => {
-      res.json({ success: true, data: art });
+      console.log(art);
+      res.status(200).json(art);
     })
     .catch(err => {
       res.json({ success: false, data: { error: err } });
     });
 });
+
 
 // Use our router configuration when we call /api
 app.use('/api', router);
