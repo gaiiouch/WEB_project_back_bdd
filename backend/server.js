@@ -49,7 +49,7 @@ router.post('/login', async (req, res) => {
 });
 
 // POST /api/signup
-app.post('/signup', async (req, res) => {
+router.post('/signup', async (req, res) => {
   const { username } = req.body;
   try {
     let user = await User.findOne({ username });
