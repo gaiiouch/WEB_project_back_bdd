@@ -1,37 +1,69 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const Art = require("./model/Art");
 require('dotenv').config();
+const express = require('express');
+const bodyParser = require("body-parser");
+const cors = require('cors');
+const mongoose = require('mongoose');
+const Art = require('./model/Art'); 
+const User = require('./model/User'); 
 
 
-// and create our instances
 const app = express();
 const router = express.Router();
+app.use(cors());
 
-// set our port to either a predetermined port number if you have set it up, or 3001
 const API_PORT = process.env.API_PORT;
 
 mongoose.connect(process.env.DB_URL)
 var db = mongoose.connection;
 db.on('error',()=> console.error('Erreur de connexion'));
 
-// now we should configure the API to use bodyParser and look for JSON data in the request body
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// now we can set the route path & initialize the API
 
+// GET /arts & /users
 router.get('/arts', (req, res) => {
   Art.find()
-    .then(art => {
-      res.json(art);
-    })
-    .catch(err => {
-      res.json({ success: false, data: { error: err } });
-    });
+    .then(art => {res.status(200).json(art);})
+    .catch(err => {res.json({ success: false, data: { error: err } });});
 });
 
+router.get('/users', (req, res) => {
+  User.find()
+    .then(user => {res.status(200).json(user);})
+    .catch(err => {res.json({ success: false, data: { error: err } });});
+});
+
+// POST /api/login 
+router.post('/login', async (req, res) => {
+  const { username } = req.body;
+  try {
+    let user = await User.findOne({ username });
+    if (!user) {
+      return res.status(400).json({ msg: 'User does not exists' });
+    }
+    res.status(201).json({ msg: 'User connected successfully' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST /api/signup
+app.post('/signup', async (req, res) => {
+  const { username } = req.body;
+  try {
+    let user = await User.findOne({ username });
+    if (user) {
+      return res.status(400).json({ msg: 'User already exists' });
+    }
+
+    user = new User({ username });
+    await user.save();
+    res.status(200).json({ msg: 'User created successfully' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 // Use our router configuration when we call /api
 app.use('/api', router);
