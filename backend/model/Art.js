@@ -1,3 +1,4 @@
+const { Int32, Double } = require("mongodb");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -6,9 +7,13 @@ const Schema = mongoose.Schema;
 const ArtSchema = new Schema({
   title: String,
   artist: String,
-  date: String,
+  date: Number,
   image: String,
   more_info: String,
+  title_hint: String,
+  artist_hint: String,
+  date_hint: String,
+  museum: String,
   level: String
 });
 
