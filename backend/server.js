@@ -22,8 +22,20 @@ app.use(bodyParser.json());
 
 
 // GET /arts & /users
-router.get('/arts', (req, res) => {
-  Art.find()
+router.get('/arts/easy', (req, res) => {
+  Art.find({level: 'facile'})
+    .then(art => {res.status(200).json(art);})
+    .catch(err => {res.json({ success: false, data: { error: err } });});
+});
+
+router.get('/arts/medium', (req, res) => {
+  Art.find({level: 'moyen'})
+    .then(art => {res.status(200).json(art);})
+    .catch(err => {res.json({ success: false, data: { error: err } });});
+});
+
+router.get('/arts/hard', (req, res) => {
+  Art.find({level: 'difficile'})
     .then(art => {res.status(200).json(art);})
     .catch(err => {res.json({ success: false, data: { error: err } });});
 });
