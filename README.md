@@ -15,3 +15,9 @@ Installation des dépendances :
 
 Commande pour exécuter le code :
 ```npx nodemon ./server.js``` ou ```node ./server.js```
+
+## Informations supplémentaires
+
+Pour le bon fonctionnement du code veuillez mettre :
+- le numéro de port pour le backend
+- le lien pour accéder à votre base de données
