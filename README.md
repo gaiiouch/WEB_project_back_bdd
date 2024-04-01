@@ -18,6 +18,6 @@ Commande pour exécuter le code :
 
 ## Informations supplémentaires
 
-Pour le bon fonctionnement du code veuillez mettre :
+Pour le bon fonctionnement du code veuillez mettre dans un fichier _.env_ :
 - le numéro de port pour le backend
 - le lien pour accéder à votre base de données
